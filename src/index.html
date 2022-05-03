@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,28 +37,32 @@
       <div class="col-sm-6 col-md-4 col-lg-4">
         <div class="panel panel-default panel-pet">
           <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
+            <h3 class="panel-title product-title">Scrappy</h3>
           </div>
           <div class="panel-body">
             <img
               alt="140x140"
               data-src="holder.js/140x140"
-              class="img-rounded img-center img-thumbnail"
-              height="100"
+              class="product-image"
               src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg"
               data-holder-rendered="true"
             />
             <br /><br />
-            <strong>Description</strong>:
-            <span class="product-description">Golden Retriever</span><br />
+            <div class="flex">
+              <strong>Description</strong>:
+              <div class="product-description product-description">
+                Golden Retriever
+              </div>
+            </div>
+
             <strong>Rating</strong>: <span class="product-rating">3</span><br />
             <strong>Category</strong>:
             <span class="product-category">Warren, MI</span><br />
-            <strong>Price</strong>: <span class="product-price">3</span
-            ><span> ETH</span> <br /><br />
-            <div class="mx-auto">
+            <strong class="product-price-name">Price</strong>:
+            <span class="product-price">3</span> <br /><br />
+            <div id="buy-btn" class="mx-auto">
               <button
-                class="btn btn-default btn-adopt center-block"
+                class="btn btn-default btn-adopt center-block btn-block"
                 type="button"
                 data-id="0"
                 data-price="0"
@@ -65,9 +70,9 @@
                 Buy
               </button>
             </div>
-            <div class="mx-auto">
+            <div id="sell-btn" class="mx-auto hidden">
               <button
-                class="btn btn-danger btn-quick-sell center-block"
+                class="btn btn-danger btn-quick-sell center-block btn-block"
                 type="button"
                 data-id="0"
                 data-price="0"

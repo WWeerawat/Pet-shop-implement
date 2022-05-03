@@ -1,0 +1,21 @@
+.product-image {
+  width: 100%;
+  object-fit: contain;
+  height: 300px;
+}
+
+.product-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.product-description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flex {
+  display: flex;
+}

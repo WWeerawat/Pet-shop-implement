@@ -9,18 +9,14 @@ App = {
       var productsTemplate = $("#productsTemplate");
 
       for (i = 0; i < data.length; i++) {
-        productsTemplate
-          .find(".panel-title")
-          .text(data[i].title.substr(0, 26) + "...");
+        productsTemplate.find(".panel-title").text(data[i].title);
         productsTemplate.find("img").attr("src", data[i].image);
-        productsTemplate
-          .find(".product-description")
-          .text(data[i].description.substr(0, 20) + "...");
+        productsTemplate.find(".product-description").text(data[i].description);
         productsTemplate.find(".product-rating").text(data[i].rating.rate);
         productsTemplate.find(".product-category").text(data[i].category);
         productsTemplate
           .find(".product-price")
-          .text((data[i].price / 100).toFixed(4));
+          .text((data[i].price / 100).toFixed(4) + " ETH");
         productsTemplate
           .find("button")
           .attr("data-id", data[i].id)
@@ -91,19 +87,39 @@ App = {
       })
       .then(function (adopters) {
         console.log(adopters);
-        for (i = 0; i < adopters.length; i++) {
-          if (adopters[i] !== "0x0000000000000000000000000000000000000000") {
-            var adopterAddr =
-              adopters[i].toString().substr(0, 5) +
-              "................" +
-              adopters[i].toString().substr(13, 4);
-            $(".panel-pet")
-              .eq(i)
-              .find(".btn-adopt")
-              .text(`Bought by ${adopterAddr}`)
-              .attr("disabled", true);
+        web3.eth.getAccounts(function (error, accounts) {
+          if (error) {
+            console.log(error);
           }
-        }
+          var account = accounts[0];
+
+          for (i = 0; i < adopters.length; i++) {
+            if (adopters[i] !== "0x0000000000000000000000000000000000000000") {
+              var adopterAddr =
+                adopters[i].toString().substr(0, 5) +
+                "................" +
+                adopters[i].toString().substr(38, 4);
+              $(".panel-pet").eq(i).find(".btn-adopt").addClass("hidden");
+              $(".panel-pet").eq(i).find(".product-price-name").text(`Sold`);
+              $(".panel-pet")
+                .eq(i)
+                .find(".product-price")
+                .text(`Bought by ${adopterAddr}`);
+              // console.log(sellBtn);
+
+              console.log(account);
+              if (account !== adopters[i]) {
+                $(".panel-pet").eq(i).find("#sell-btn").removeClass("hidden");
+                $(".panel-pet")
+                  .eq(i)
+                  .find(".btn-quick-sell")
+                  .attr("disabled", true);
+              } else {
+                $(".panel-pet").eq(i).find("#sell-btn").removeClass("hidden");
+              }
+            }
+          }
+        });
       })
       .catch(function (err) {
         console.log(err.message);
@@ -174,6 +190,7 @@ App = {
           });
         })
         .then(function (result) {
+          window.location.reload();
           return App.markAdopted();
         })
         .catch(function (err) {
